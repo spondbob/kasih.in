@@ -1,0 +1,14 @@
+{
+  "name": "kasih.in",
+  "version": "1.0.0",
+  "description": "Charity project. Used for sharing (and learning).",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bagus Trihatmaja",
+  "license": "ISC"
+}
