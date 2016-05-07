@@ -57,3 +57,6 @@ gem 'react-rails', '~> 1.0'
 
 # CSS
 gem 'materialize-sass'
+
+# Styling does matter
+gem 'rubocop', require: false
