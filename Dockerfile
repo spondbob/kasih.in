@@ -1,4 +1,4 @@
-FROM ruby:2.2.3
+FROM ruby:2.3.1
 
 MAINTAINER bagus bagus.trihatmaja@gmail.com
 
@@ -12,3 +12,6 @@ RUN bundle install
 RUN mkdir /myapp
 ADD kasih.in /myapp
 WORKDIR /myapp
+
+RUN curl -L https://npmjs.org/install.sh | sh
+RUN npm install webpack -g
