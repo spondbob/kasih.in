@@ -18,6 +18,7 @@
 
 # Ignore dependency directory
 /kasih.in/node_modules
+/kasih.in/app/assets/javascripts/bundle.js
 
 # Mac files
 .DS_Store
