@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as helpActions from '../../../actions/helpActions';
-import HelpFormUI from './presentational/HelpForm';
+import HelpFormUI from './presentation/HelpForm';
 
 class HelpForm extends React.Component{
   constructor(props, context) {
@@ -16,21 +16,18 @@ class HelpForm extends React.Component{
 
   render(){
     return (
-      <HelpFormUI actions={this.props.actions} helps={this.props.helps} />
+      <HelpFormUI actions={this.props.actions} />
     );
   }
 }
 
 HelpForm.propTypes = {
-  actions: PropTypes.object.isRequired,
-  helps: PropTypes.array.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 
 function mapStateToProps(state, ownProps){
-  return {
-    helps: state.helps
-  };
+  return {};
 }
 
 function mapDispatchToProps(dispatch){

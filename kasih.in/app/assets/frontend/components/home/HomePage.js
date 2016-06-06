@@ -9,8 +9,7 @@ class HomePage extends React.Component{
         <p>Helping people is easy.</p>
         <div className="wrapper">
             <Link to="about" align="center" className="btn btn-primary btn-large">Learn more</Link>
-            {"|"}
-            <Link to="help" align="center" className="btn btn-primary btn-large">Try now</Link>
+            <Link to="help" align="center"  className="btn btn-primary btn-large">Try now</Link>
         </div>
       </div>
     );

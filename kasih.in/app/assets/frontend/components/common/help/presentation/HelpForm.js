@@ -9,7 +9,7 @@ class HelpForm extends React.Component{
     this.state = {
       help: { message: "" }
     };
-
+    this.props.actions.getHelpsFeed();
     this.onMessageChange = this.onMessageChange.bind(this);
     this.onClickPost = this.onClickPost.bind(this);
   }
@@ -24,14 +24,10 @@ class HelpForm extends React.Component{
       this.props.actions.createHelp(this.state.help);
   }
 
-  helpRow(help, index){
-    return <div key={index}>{help.message}</div>;
-  }
-
   render(){
     return (
       <div>
-        <h2>What can you help today?</h2>
+        <h4 className="center">What can you help today?</h4>
         <input
           type="text"
           onChange={this.onMessageChange}
@@ -41,17 +37,14 @@ class HelpForm extends React.Component{
           value="Post"
           className="btn btn-primary"
           onClick={this.onClickPost} />
-          <h3>Helps</h3>
-          {this.props.helps.map(this.helpRow)}
-      </div>
 
+      </div>
     );
   }
 }
 
 HelpForm.propTypes = {
-  actions: PropTypes.object.isRequired,
-  helps: PropTypes.array.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 

@@ -1,7 +1,10 @@
 import {combineReducers} from 'redux';
-import helps from './helpReducer';
+import help from './helpReducer';
+import helps from './helpsReducer';
+
 
 const rootReducer = combineReducers({
+    help,
     helps
 });
 
