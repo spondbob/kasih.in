@@ -30444,19 +30444,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.default = helpsReducer;
 
 	var _actionTypes = __webpack_require__(495);
 
 	var types = _interopRequireWildcard(_actionTypes);
 
-	var _redux = __webpack_require__(473);
-
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	function helps() {
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function helpsReducer() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {
 	    isFetching: false,
-	    helps: []
+	    items: []
 	  } : arguments[0];
 	  var action = arguments[1];
 
@@ -30468,18 +30469,12 @@
 	    case types.HELPS_FEED_SUCCESS:
 	      return Object.assign({}, state, {
 	        isFetching: false,
-	        helps: action.helps
+	        items: [].concat(_toConsumableArray(state.items), _toConsumableArray(action.items))
 	      });
 	    default:
 	      return state;
 	  }
 	}
-
-	var rootReducer = (0, _redux.combineReducers)({
-	  helps: helps
-	});
-
-	exports.default = rootReducer;
 
 /***/ },
 /* 497 */
@@ -32604,10 +32599,10 @@
 	  };
 	}
 
-	function getHelpsFeedSuccess(helps) {
+	function getHelpsFeedSuccess(items) {
 	  return {
 	    type: types.HELPS_FEED_SUCCESS,
-	    helps: helps
+	    items: items
 	  };
 	}
 
@@ -38376,9 +38371,9 @@
 
 	var _AboutPage2 = _interopRequireDefault(_AboutPage);
 
-	var _HelpForm = __webpack_require__(578);
+	var _HelpPage = __webpack_require__(580);
 
-	var _HelpForm2 = _interopRequireDefault(_HelpForm);
+	var _HelpPage2 = _interopRequireDefault(_HelpPage);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38387,7 +38382,7 @@
 	  { path: '/', component: _App2.default },
 	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _AboutPage2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: 'help', component: _HelpForm2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: 'help', component: _HelpPage2.default })
 	);
 
 /***/ },
@@ -38540,29 +38535,37 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'jumbotron' },
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Kasih.in'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Helping people is easy.'
-	        ),
+	        { className: 'row' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'wrapper' },
+	          { className: 'col s12' },
 	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'about', align: 'center', className: 'btn btn-primary btn-large' },
-	            'Learn more'
+	            'h1',
+	            { className: 'center-align' },
+	            'Kasih.in'
 	          ),
 	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'help', align: 'center', className: 'btn btn-primary btn-large' },
-	            'Try now'
+	            'h4',
+	            { className: 'center-align' },
+	            'Helping people is easy.'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col s6 right-align' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { className: 'center-align btn btn-primary btn-large', to: 'about' },
+	              'Learn more'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col s6 left-align' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { className: 'center-align btn btn-primary btn-large', to: 'help' },
+	              'Try now'
+	            )
 	          )
 	        )
 	      );
@@ -38746,7 +38749,7 @@
 	    _this.state = {
 	      help: { message: "" }
 	    };
-	    _this.props.actions.getHelpsFeed();
+
 	    _this.onMessageChange = _this.onMessageChange.bind(_this);
 	    _this.onClickPost = _this.onClickPost.bind(_this);
 	    return _this;
@@ -38796,6 +38799,181 @@
 	};
 
 	exports.default = HelpForm;
+
+/***/ },
+/* 580 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(300);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(466);
+
+	var _redux = __webpack_require__(473);
+
+	var _helpActions = __webpack_require__(510);
+
+	var _HelpForm = __webpack_require__(578);
+
+	var _HelpForm2 = _interopRequireDefault(_HelpForm);
+
+	var _HelpFeedItem = __webpack_require__(581);
+
+	var _HelpFeedItem2 = _interopRequireDefault(_HelpFeedItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function loadData(props) {
+	  props.getHelpsFeed();
+	}
+
+	var HelpPage = function (_React$Component) {
+	  _inherits(HelpPage, _React$Component);
+
+	  function HelpPage() {
+	    _classCallCheck(this, HelpPage);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(HelpPage).apply(this, arguments));
+	  }
+
+	  _createClass(HelpPage, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      loadData(this.props);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var helps = _props.helps;
+	      var getHelpsFeed = _props.getHelpsFeed;
+	      var items = _props.items;
+	      var isFetching = _props.isFetching;
+
+	      var i = 0;
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_HelpForm2.default, null),
+	        items.map(function (item) {
+	          return _react2.default.createElement(_HelpFeedItem2.default, { key: item.id, item: item });
+	        })
+	      );
+	    }
+	  }]);
+
+	  return HelpPage;
+	}(_react2.default.Component);
+
+	HelpPage.propTypes = {
+	  helps: _react.PropTypes.object.isRequired,
+	  getHelpsFeed: _react.PropTypes.func.isRequired,
+	  items: _react.PropTypes.array.isRequired,
+	  isFetching: _react.PropTypes.bool.isRequired
+	};
+
+	function mapStateToProps(state, ownProps) {
+	  return {
+	    helps: state.helps,
+	    items: state.helps.items,
+	    isFetching: state.helps.isFetching
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { getHelpsFeed: _helpActions.getHelpsFeed })(HelpPage);
+
+/***/ },
+/* 581 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(300);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var HelpFeedItem = function (_React$Component) {
+	  _inherits(HelpFeedItem, _React$Component);
+
+	  function HelpFeedItem() {
+	    _classCallCheck(this, HelpFeedItem);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(HelpFeedItem).apply(this, arguments));
+	  }
+
+	  _createClass(HelpFeedItem, [{
+	    key: "render",
+	    value: function render() {
+	      var item = this.props.item;
+
+
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "row" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "col s12 m6" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "card green" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "card-content white-text" },
+	              _react2.default.createElement(
+	                "span",
+	                { className: "card-title" },
+	                item.name
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                item.message
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return HelpFeedItem;
+	}(_react2.default.Component);
+
+	exports.default = HelpFeedItem;
+
+
+	HelpFeedItem.propTypes = {
+	  item: _react.PropTypes.object.isRequired
+	};
 
 /***/ }
 /******/ ]);

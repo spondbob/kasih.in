@@ -3,12 +3,12 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
 import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
-import HelpForm from './components/common/help/HelpForm';
+import HelpPage from './components/help/HelpPage';
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
     <Route path="about" component={AboutPage} />
-    <Route path="help" component={HelpForm} />
+    <Route path="help" component={HelpPage} />
   </Route>
 );

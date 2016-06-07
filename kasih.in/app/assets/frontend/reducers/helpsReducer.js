@@ -1,9 +1,8 @@
 import * as types from '../actions/actionTypes';
-import {combineReducers} from 'redux';
 
-function helps(state = {
+export default function helpsReducer(state = {
   isFetching: false,
-  helps: []
+  items: []
 }, action) {
   switch (action.type) {
     case types.HELPS_FEED_REQUEST:
@@ -13,15 +12,12 @@ function helps(state = {
     case types.HELPS_FEED_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        helps: action.helps
+        items: [
+          ...state.items,
+          ...action.items
+        ]
       });
     default:
       return state;
   }
 }
-
-const rootReducer = combineReducers({
-  helps
-});
-
-export default rootReducer;

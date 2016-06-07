@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
 
-class HelpForm extends React.Component{
+class HelpForm extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -9,7 +9,7 @@ class HelpForm extends React.Component{
     this.state = {
       help: { message: "" }
     };
-    this.props.actions.getHelpsFeed();
+
     this.onMessageChange = this.onMessageChange.bind(this);
     this.onClickPost = this.onClickPost.bind(this);
   }
@@ -24,7 +24,7 @@ class HelpForm extends React.Component{
       this.props.actions.createHelp(this.state.help);
   }
 
-  render(){
+  render() {
     return (
       <div>
         <h4 className="center">What can you help today?</h4>

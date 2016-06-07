@@ -13,10 +13,10 @@ export function getHelpsFeed() {
   };
 }
 
-export function getHelpsFeedSuccess(helps) {
+export function getHelpsFeedSuccess(items) {
   return {
     type: types.HELPS_FEED_SUCCESS,
-    helps: helps
+    items: items
   };
 }
 
