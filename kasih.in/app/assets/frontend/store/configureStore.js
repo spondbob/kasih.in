@@ -8,6 +8,7 @@ export default function configureStore(initialState) {
     helpSagas
   ];
   const sagaMiddleWare = createSagaMiddleware();
+
   const store = createStore(
     rootReducer,
     initialState,

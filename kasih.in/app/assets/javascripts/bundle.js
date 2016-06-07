@@ -30349,6 +30349,7 @@
 	function configureStore(initialState) {
 	  var rootSagas = [_helpSaga2.default];
 	  var sagaMiddleWare = (0, _reduxSaga2.default)();
+
 	  var store = (0, _redux.createStore)(_reducers2.default, initialState, (0, _redux.compose)((0, _redux.applyMiddleware)(sagaMiddleWare), window.devToolsExtension ? window.devToolsExtension() : function (f) {
 	    return f;
 	  }));
@@ -32538,6 +32539,7 @@
 	      }
 	   }, _marked[0], this, [[0, 8]]);
 	}
+
 	function mySaga() {
 	   return regeneratorRuntime.wrap(function mySaga$(_context2) {
 	      while (1) {
@@ -38486,7 +38488,8 @@
 	          null,
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: 'about', className: 'grey-text text-darken-2', activeClassName: 'active' },
+	            { to: 'about', className: 'grey-text text-darken-2',
+	              activeClassName: 'active' },
 	            'About'
 	          )
 	        )
