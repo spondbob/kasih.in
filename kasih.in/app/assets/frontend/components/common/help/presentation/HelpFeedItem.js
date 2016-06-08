@@ -4,19 +4,17 @@ export default class HelpFeedItem extends React.Component {
   render() {
     const {
       item
-    } = this.props
+    } = this.props;
 
     return (
-      <div className="row">
-          <div className="col s12 m6">
-            <div className="card green">
-              <div className="card-content white-text">
-                <span className="card-title">{item.name}</span>
-                <p>{item.message}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <li className="collection-item avatar">
+        <img src="images/yuna.jpg" alt="" className="circle" />
+        <span className="title">{item.name}</span>
+        <p>{item.message}<br />
+        </p>
+        <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
+      </li>
+
 
     );
   }
@@ -24,4 +22,4 @@ export default class HelpFeedItem extends React.Component {
 
 HelpFeedItem.propTypes = {
   item: PropTypes.object.isRequired
-}
+};

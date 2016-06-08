@@ -26,17 +26,18 @@ class HelpForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h4 className="center">What can you help today?</h4>
         <input
           type="text"
           onChange={this.onMessageChange}
           value={this.state.help.message} />
-        <input
+        <button
           type="submit"
-          value="Post"
-          className="btn btn-primary"
-          onClick={this.onClickPost} />
+          className="btn waves-effect waves-light"
+          onClick={this.onClickPost}>POST
+          <i className="material-icons right">send</i>
+        </button>
 
       </div>
     );

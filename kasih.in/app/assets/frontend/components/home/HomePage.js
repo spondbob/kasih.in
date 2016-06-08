@@ -7,7 +7,7 @@ class HomePage extends React.Component {
       <div className="row">
         <div className="col s12">
           <h1 className="center-align">Kasih.in</h1>
-          <h4 className="center-align">Helping people is easy.</h4>
+          <h4 className="center-align">Helping people is easy .</h4>
           <div className="col s6 right-align">
             <Link className="center-align btn btn-primary btn-large" to="about">Learn more</Link>
           </div>

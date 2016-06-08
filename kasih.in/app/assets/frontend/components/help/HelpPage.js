@@ -20,10 +20,13 @@ class HelpPage extends React.Component {
     return (
       <div>
         <HelpForm />
-          {items.map(item =>
-            <HelpFeedItem key={item.id} item={item} />
-          )}
-
+        <div className="container">
+          <ul className="collection collapsible" data-collapsible="accordion">
+            {items.map(item =>
+              <HelpFeedItem key={item.id} item={item} />
+            )}
+          </ul>
+        </div>
       </div>
     );
   }
