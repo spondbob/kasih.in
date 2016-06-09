@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import HelpFeedModal from './HelpFeedModal';
 
 export default class HelpFeedItem extends React.Component {
 
