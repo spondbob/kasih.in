@@ -1,20 +1,19 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as helpActions from '../../../actions/helpActions';
 import HelpFormUI from './presentation/HelpForm';
 
-class HelpForm extends React.Component{
+class HelpForm extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      help: { message: "" }
+      help: { message: "" },
     };
-
   }
 
-  render(){
+  render() {
     return (
       <HelpFormUI actions={this.props.actions} />
     );
@@ -22,17 +21,17 @@ class HelpForm extends React.Component{
 }
 
 HelpForm.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 };
 
 
-function mapStateToProps(state, ownProps){
+function mapStateToProps(state, ownProps) {
   return {};
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(helpActions, dispatch)
+    actions: bindActionCreators(helpActions, dispatch),
   };
 }
 
