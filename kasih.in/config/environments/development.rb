@@ -37,6 +37,12 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  config.action_controller.asset_host = Proc.new { |source|
+    if source =~ /bundle\.js$/i
+    "http://localhost:8080"
+    end
+  }
+
   config.assets.digest = false
 
 

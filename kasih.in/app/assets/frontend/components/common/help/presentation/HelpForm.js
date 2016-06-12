@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
 
 class HelpForm extends React.Component {
@@ -7,21 +7,21 @@ class HelpForm extends React.Component {
     super(props, context);
 
     this.state = {
-      help: { message: "" }
+      help: { message: "" },
     };
 
     this.onMessageChange = this.onMessageChange.bind(this);
     this.onClickPost = this.onClickPost.bind(this);
   }
 
-  onMessageChange(event){
+  onMessageChange(event) {
     const help = this.state.help;
     help.message = event.target.value;
-    this.setState({help: help});
+    this.setState({ help });
   }
 
-  onClickPost(event){
-      this.props.actions.createHelp(this.state.help);
+  onClickPost(event) {
+    this.props.actions.createHelp(this.state.help);
   }
 
   render() {
@@ -45,7 +45,7 @@ class HelpForm extends React.Component {
 }
 
 HelpForm.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 };
 
 

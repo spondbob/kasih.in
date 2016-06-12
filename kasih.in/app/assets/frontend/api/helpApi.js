@@ -4,8 +4,8 @@ const TIMEOUT = 100;
 
 export const api = {
   getHelps() {
-    return new Promise( resolve => {
+    return new Promise(resolve => {
       setTimeout(() => resolve(_helps), TIMEOUT);
     });
-  }
+  },
 };

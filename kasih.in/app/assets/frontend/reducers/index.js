@@ -1,11 +1,11 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import help from './helpReducer';
 import helps from './helpsReducer';
 
 
 const rootReducer = combineReducers({
-    help,
-    helps
+  help,
+  helps,
 });
 
 export default rootReducer;
