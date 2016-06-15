@@ -59,7 +59,7 @@ class FullWidthSection extends Component {
       content =
         React.createElement(
           contentType,
-          {style: Object.assign(styles.content, contentStyle)},
+          { style: Object.assign(styles.content, contentStyle) },
           this.props.children
         );
     } else {
