@@ -5,11 +5,6 @@ import { getHelpsFeed } from '../../actions/helpActions';
 import HelpForm from '../common/help/HelpForm';
 import HelpFeedItem from '../common/help/presentation/HelpFeedItem';
 
-// FIXME:  Don't use react-materialize as it is unstable and not really
-// modifiedable.Better to use plain JSX
-
-import { Modal } from 'react-materialize';
-
 function loadData(props) {
   props.getHelpsFeed();
 }
