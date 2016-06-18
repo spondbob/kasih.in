@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
-
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
 
 class HelpForm extends React.Component {
 
@@ -28,17 +30,19 @@ class HelpForm extends React.Component {
     return (
       <div className="container">
         <h4 className="center">What can you help today?</h4>
-        <input
-          type="text"
-          onChange={this.onMessageChange}
-          value={this.state.help.message} />
-        <button
-          type="submit"
-          className="btn waves-effect waves-light"
-          onClick={this.onClickPost}>POST
-          <i className="material-icons right">send</i>
-        </button>
-
+        <div>
+          <TextField
+            id="text-field-help-feed"
+            onChange={this.onMessageChange}
+            value={this.state.help.message} />
+        </div>
+        <div>
+          <RaisedButton
+            primary
+            label="POST"
+            icon={<FontIcon className="material-icons">send</FontIcon>}
+            onClick={this.onClickPost} />
+        </div>
       </div>
     );
   }

@@ -24,24 +24,10 @@ class HelpPage extends React.Component {
     const { helps, items, isFetching } = this.props;
     return (
       <div>
-        <div>
-          <HelpForm />
-        </div>
         <div className="container">
           <ul className="collection">
             {items.map(item =>
-              <Modal 
-                key={item.id}
-                header={item.name}
-                fixedFooter
-                trigger={
-                  <a>
-                    <HelpFeedItem key={item.id} item={item} />
-                  </a>
-                }>
-                // TODO: Placeholder text. Change this to use props instead.
-                <p>Pellentesque habitant morbi tristique senectus et netus</p>
-              </Modal>
+              <HelpFeedItem key={item.id} item={item} />
             )}
           </ul>
         </div>
