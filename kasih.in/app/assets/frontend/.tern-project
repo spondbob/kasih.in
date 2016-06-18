@@ -1,9 +1,10 @@
 {
-  "libs": [
-    "browser",
-    "jquery"
-  ],
-  "plugins": {
-    "es_modules"
-  }
+    "ecmaVersion": 6,
+    "libs": [],
+    "plugins": {
+        "doc_comment": {
+            "fullDocs": true
+        },
+        "complete_strings": {}
+    }
 }
