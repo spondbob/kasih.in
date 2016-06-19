@@ -1,48 +1,34 @@
 import React, { PropTypes } from 'react';
-import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
+import TextField from 'material-ui/TextField';
+import { Field, reduxForm } from 'redux-form';
+
+export const fields = ['message'];
 
 class HelpForm extends React.Component {
-
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      help: { message: "" },
-    };
-
-    this.onMessageChange = this.onMessageChange.bind(this);
-    this.onClickPost = this.onClickPost.bind(this);
-  }
-
-  onMessageChange(event) {
-    const help = this.state.help;
-    help.message = event.target.value;
-    this.setState({ help });
-  }
-
-  onClickPost(event) {
-    this.props.actions.createHelp(this.state.help);
-  }
-
   render() {
+    const {
+      fields: { message },
+      handleSubmit,
+      resetForm,
+      submitting,
+    } = this.props;
     return (
       <div className="container">
         <h4 className="center">What can you help today?</h4>
-        <div>
-          <TextField
-            id="text-field-help-feed"
-            onChange={this.onMessageChange}
-            value={this.state.help.message} />
-        </div>
-        <div>
-          <RaisedButton
-            primary
-            label="POST"
-            icon={<FontIcon className="material-icons">send</FontIcon>}
-            onClick={this.onClickPost} />
-        </div>
+        <form onSubmit={this.onClickPost}>
+          <div>
+            <TextField {...message} hintText="I want to help ..." />
+          </div>
+          <div>
+            <RaisedButton
+              type="submit"
+              primary
+              label="POST"
+              icon={<FontIcon className="material-icons">send</FontIcon>} />
+          </div>
+        </form>
       </div>
     );
   }
@@ -50,7 +36,13 @@ class HelpForm extends React.Component {
 
 HelpForm.propTypes = {
   actions: PropTypes.object.isRequired,
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  resetForm: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };
 
-
-export default HelpForm;
+export default reduxForm({
+  form: 'help',
+  fields
+})(HelpForm);
