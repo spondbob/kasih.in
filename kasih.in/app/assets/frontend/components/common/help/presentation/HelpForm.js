@@ -1,3 +1,10 @@
+/* TODO: Add more fields to save
+ * 1. Address + Maps
+ * 2. Photos
+ * 3. Details
+ * 
+ */
+
 import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -44,5 +51,5 @@ HelpForm.propTypes = {
 
 export default reduxForm({
   form: 'help',
-  fields
+  fields,
 })(HelpForm);
