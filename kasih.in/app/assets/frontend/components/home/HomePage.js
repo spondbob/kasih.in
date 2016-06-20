@@ -22,7 +22,7 @@ const HomePage = () => (
   <FullWidthSection style={styles.root}>
     <div>
       <h1 className="center-align">Kasih.in</h1>
-      <h4 className="center-align">Helping people is easy.</h4>
+      <h4 className="center-align">Helping is easy.</h4>
       <RaisedButton 
         label="About"
         primary
