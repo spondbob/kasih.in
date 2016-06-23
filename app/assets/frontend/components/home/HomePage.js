@@ -10,31 +10,36 @@ import { grey200, cyan500, blue900, white } from 'material-ui/styles/colors';
 
 const styles = {
   root: {
-    backgroundColor: white,
-    overflow: 'hidden',
-  },
-  tagline: {
-    margin: '16px auto 0 auto',
-    textAlign: 'center',
-    maxWidth: 575,
-  },
-  h1: {
-    fontSize: 100,
-    color: blue900,
-    maxHeight: 50,
-    fontWeight: typography.fontWeightBold,
-  },
-  h2: {
-    fontSize: 20,
-    paddingTop: 5,
-    marginBottom: 13,
+    paddingTop: spacing.desktopKeylineIncrement,
   },
   button: {
     margin: 12,
   },
+  title: {
+    root: {
+      backgroundColor: white,
+      overflow: 'hidden',
+    },
+    tagline: {
+      margin: '16px auto 0 auto',
+      textAlign: 'center',
+      maxWidth: 575,
+    },
+    h1: {
+      fontSize: 100,
+      color: blue900,
+      maxHeight: 50,
+      paddingTop: 0,
+      fontWeight: typography.fontWeightBold,
+    },
+    h2: {
+      fontSize: 20,
+      paddingTop: 5,
+      marginBottom: 13,
+    },
+  },
   description: {
     root: {
-      paddingTop: 19,
       backgroundColor: white,
     },
     content: {
@@ -54,17 +59,19 @@ const styles = {
 };
 
 const HomePage = () => (
-  <FullWidthSection style={styles.root}>
-    <div style={styles.tagline}>
-      <h1 style={styles.h1}>Kasih.in</h1>
-      <h2 style={styles.h2}>Helping is easy.</h2>
-      <RaisedButton 
-        label="About"
-        primary
-        containerElement={<Link to="about" />}
-        linkButton
-        style={styles.button} />
-    </div>
+  <div style={styles.root}>
+    <FullWidthSection style={styles.title.root}>
+      <div style={styles.title.tagline}>
+        <h1 style={styles.title.h1}>Kasih.in</h1>
+        <h2 style={styles.title.h2}>Helping is easy.</h2>
+        <RaisedButton 
+          label="About"
+          primary
+          containerElement={<Link to="about" />}
+          linkButton
+          style={styles.button} />
+      </div>
+    </FullWidthSection>
     <FullWidthSection
       style={styles.description.root}
       useContent
@@ -76,7 +83,7 @@ const HomePage = () => (
       help near you.<br />
       Kasih.in is 100% free.
     </FullWidthSection>
-  </FullWidthSection>
+  </div>
 );
 
 export default HomePage;

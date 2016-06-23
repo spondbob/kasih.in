@@ -22,6 +22,4 @@ describe('Home Page', () => {
     ])
     ).toBe(true);
   });
-  it('has feature list', () => {
-  });
 });
