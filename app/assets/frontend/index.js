@@ -17,6 +17,7 @@ injectTapEventPlugin();
 const muiTheme = getMuiTheme({
   palette: {
     textColor: black,
+    paddingTop: 0,
   },
   appBar: {
     height: 70,
