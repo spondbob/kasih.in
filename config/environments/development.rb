@@ -38,7 +38,7 @@ Rails.application.configure do
   config.active_record.migration_error = :page_load
 
   config.action_controller.asset_host = Proc.new { |source|
-    if source =~ /bundle\.js$/i
+    if source =~ /wp_bundle\.js$/i
     "http://localhost:8080"
     end
   }
