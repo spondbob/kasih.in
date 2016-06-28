@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import LoginPage from './LoginPage.js'; 
 import sinon from 'sinon';
 import Checkbox from 'material-ui/Checkbox';
+import CircularProgress from 'material-ui/CircularProgress';
 
 describe('Login Page', () => {
   let subject = null;
@@ -82,7 +83,12 @@ describe('Login Page', () => {
            .find('#sign-up')
            .length).toEqual(1);
   });
-  it('displays loading icon when trying to login');
+  it('displays loading icon when trying to login', () => {
+    submitting = true;
+    subject = buildSubject();
+    expect(subject.find(CircularProgress)
+      .length).toEqual(1);
+  });
   it('displays error message');
   it('redirects to main page after successfully login');
 });

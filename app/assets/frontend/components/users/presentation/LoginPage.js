@@ -2,20 +2,29 @@ import React, { PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import FlatButton from 'material-ui/FlatButton';
+import CircularProgress from 'material-ui/CircularProgress';
+import { loginSubmit } from '../../../actions/userActions';
+
+const submit = (values, dispatch) => 
+  new Promise((resolve, reject) => {
+    dispatch(loginSubmit({ values, resolve, reject }));
+  });
 
 class LoginPage extends React.Component {
-  mySubmit(values) {
-    this.props.onSave(values).then(() => {
-      this.props.resetForm();
-    });
-  }
-
   render() {
-    const { fields: { username, password, rememberMe } } = this.props;
-    const submitClassName = 'ok';
+    const { 
+      fields: { 
+        username, 
+        password, 
+        rememberMe, 
+      }, 
+      submitting,
+      resetForm,
+      handleSubmit,
+    } = this.props;
 
     return (
-      <form onSubmit={this.props.handleSubmit(this.mySubmit.bind(this))}>
+      <form onSubmit={handleSubmit(submit.bind(this))}>
         <div>
           <TextField
             id="username" 
@@ -28,7 +37,7 @@ class LoginPage extends React.Component {
             id="password"
             type="password"
             hintText="Password"
-            errorText={username.touched && username.error} 
+            errorText={password.touched && password.error} 
             {...password} />
         </div>
         <div>
@@ -47,7 +56,11 @@ class LoginPage extends React.Component {
         </div>
         <br />
         <div>
-          <FlatButton primary label="Login" />
+          {this.props.submitting ? <CircularProgress size={0.5} /> : 
+            <FlatButton  
+              primary 
+              label="Login"
+              type="submit" />}
         </div>
       </form>
     );
@@ -55,8 +68,6 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
-  onSave: PropTypes.func.isRequired,
-
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,

@@ -13,12 +13,9 @@ function* getHelps() {
   }
 }
 
-function* mySaga() {
+function* helpFeedsFlow() {
   yield* takeLatest("HELPS_FEED_REQUEST", getHelps);
 }
 
-export default function* root() {
-  yield [
-    fork(mySaga),
-  ];
-}
+export default helpFeedsFlow;
+
