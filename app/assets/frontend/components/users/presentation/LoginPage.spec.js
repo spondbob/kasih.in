@@ -3,6 +3,7 @@ import expect from 'expect';
 import { shallow } from 'enzyme';
 import LoginPage from './LoginPage.js'; 
 import sinon from 'sinon';
+import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import CircularProgress from 'material-ui/CircularProgress';
 
@@ -51,8 +52,7 @@ describe('Login Page', () => {
     };
     return shallow(<LoginPage {...props} />);
   };
-
-  // The login form has to have these fields 
+  
   it('has username input', () => {
     subject = buildSubject();
     expect(subject.find('#username')
@@ -83,13 +83,22 @@ describe('Login Page', () => {
            .find('#sign-up')
            .length).toEqual(1);
   });
-  it('displays loading icon when trying to login', () => {
-    submitting = true;
-    subject = buildSubject();
-    expect(subject.find(CircularProgress)
-      .length).toEqual(1);
+  context('when submitting', () => {
+    it('displays loading icon', () => {
+      submitting = true;
+      subject = buildSubject();
+      expect(subject.find(CircularProgress)
+             .length).toEqual(1);
+    });
   });
-  it('displays error message');
-  it('redirects to main page after successfully login');
+  context('when in an error state', () => {
+    it('renders error messages for the input', () => {
+      touched = true;
+      error = "Login failed!";
+      subject = buildSubject();
+      expect(subject.find({ error: 'Login failed!' })
+             .length).toEqual(2);
+    });
+  });
 });
 
