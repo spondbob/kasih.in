@@ -1,7 +1,6 @@
 import * as types from './actionTypes.js';
 
-export function loginSubmit(login={}) {
-  console.log("here");
+export function loginSubmit(login = {}) {
   return {
     type: types.LOGIN_SUBMIT,
     values: login.values,
