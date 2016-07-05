@@ -2,7 +2,7 @@
  * 1. Address + Maps
  * 2. Photos
  * 3. Details
- * 
+ *
  */
 
 import React, { PropTypes } from 'react';
