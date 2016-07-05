@@ -4,28 +4,29 @@ import { take, put, call, fork, select } from 'redux-saga/effects';
 
 function* loginFlow() {
   while (true) {
-    const {  
-        values, 
-        resolve, 
-        reject, 
+    const {
+        values,
+        resolve,
+        reject,
     } = yield take(types.LOGIN_SUBMIT);
-    if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
+    if (!['john'].includes(values.username)) {
       yield call(
-        reject, 
-        { 
-          username: 'User does not exist', 
+        reject,
+        {
+          username: 'User does not exist',
           _error: 'Login failed!',
         });
-    } else if (values.password !== 'redux-form') {
+    } else if (values.password !== 'snow') {
       yield call(
-        reject, 
-        { 
-          password: 'Wrong password', 
-          _error: 'Login failed!', 
+        reject,
+        {
+          password: 'Wrong password',
+          _error: 'Login failed!',
         });
     } else {
       yield call(resolve);
-    } 
+      yield put({ type: types.LOGIN_SUBMIT_SUCCESS, username: values.username });
+    }
   }
 }
 
