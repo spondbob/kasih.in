@@ -1,7 +1,6 @@
 /* TODO: Add more fields to save
  * 1. Address + Maps
  * 2. Photos
- * 3. Details
  *
  */
 
@@ -54,11 +53,12 @@ class HelpForm extends React.Component {
 
     return (
       <div style={styles.root}>
-        <h4 className="center">What can you help today?</h4>
+        <h1 className="center">What can you help today?</h1>
         <form onSubmit={this.onClickPost}>
           <div>
             <TextField
               style={styles.textField}
+              errorText={message.touched && message.error}
               {...message}
               hintText="I want to help ..." />
           </div>
@@ -66,7 +66,11 @@ class HelpForm extends React.Component {
             <RaisedButton
               type="submit"
               primary
-              disabled={!formValues}
+              disabled={
+                formValues === undefined ||
+                formValues === null ||
+                formValues.message === ''
+              }
               label="POST"
               icon={<FontIcon className="material-icons">send</FontIcon>} />
             <IconButton
@@ -113,9 +117,21 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+const validate = (values) => {
+  const errors = {};
+  const isEmpty = (value) =>
+    value === undefined || value === null || value === '';
+
+  if (isEmpty(values.message)) {
+    errors.message = 'Message is required';
+  }
+  return errors;
+};
+
 const helpForm = reduxForm({
   form: 'help',
   fields,
+  validate,
 })(HelpForm);
 
 export default connect(mapStateToProps, mapDispatchToProps)(helpForm);
