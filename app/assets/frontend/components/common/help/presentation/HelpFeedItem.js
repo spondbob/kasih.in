@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { 
-  Card, 
-  CardActions, 
-  CardHeader, 
-  CardMedia, 
-  CardTitle, 
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardTitle,
   CardText } from 'material-ui/Card';
 
 // TODO: Optimize the usage of cards
@@ -15,16 +15,15 @@ import {
 // CardActions: What actions can a user do?
 // Source: http://www.material-ui.com/ => Components => Cards
 
-const HelpFeedItem = (props) => 
+const HelpFeedItem = (props) =>
   <Card>
     <CardHeader
       title={props.item.name}
-      subtitle=""
+      subtitle={props.item.message}
+      actAsExpander
+      showExpandableButton
       avatar="images/yuna.jpg" />
-    <CardTitle 
-      title={props.item.message} 
-      subtitle="" />
-    <CardText>
+    <CardText expandable>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
       Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed.

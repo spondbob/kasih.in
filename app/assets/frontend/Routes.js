@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import { Router, browserHistory, Route, IndexRoute } from 'react-router';
 import { Provider, connect } from 'react-redux';
 import * as auth from './utils/auth';
-import App from './components/App';
-import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
+import App from './components/App';
+import DashboardPage from './components/dashboard/DashboardPage';
+import HomePage from './components/home/HomePage';
 import HelpPage from './components/help/HelpPage';
 import LoginPage from './components/users/LoginPage.js';
 import HelpForm from './components/common/help/HelpForm.js';
@@ -21,9 +22,11 @@ const Routes = (props) => {
       <Router history={browserHistory}>
         <Route component={App}>
           <Route path="/" component={HomePage} />
+          <Route path="about" component={AboutPage} />
           <Route path="login" component={LoginPage} />
-          <Route>
-            <Route path="about" component={AboutPage} onEnter={checkAuth} />
+          <Route path="dashboard" component={DashboardPage} />
+          <Route onEnter={checkAuth}>
+
             <Route path="help" component={HelpPage} />
             <Route path="help/new" component={HelpForm} />
           </Route>

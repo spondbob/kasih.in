@@ -1,6 +1,7 @@
 import * as types from '../actions/actionTypes';
 import { takeEvery, takeLatest } from 'redux-saga';
 import { take, put, call, fork, select } from 'redux-saga/effects';
+import { forwardTo } from '../utils/auth';
 
 function* loginFlow() {
   while (true) {
@@ -25,7 +26,10 @@ function* loginFlow() {
         });
     } else {
       yield call(resolve);
-      yield put({ type: types.LOGIN_SUBMIT_SUCCESS, username: values.username });
+      yield put({
+        type: types.LOGIN_SUBMIT_SUCCESS,
+        username: values.username });
+      yield call(forwardTo, '/dashboard');
     }
   }
 }
