@@ -64,12 +64,12 @@ class DashboardPage extends React.Component {
                   onClick={() => this.handleClick('about')} />
               </List>
             </Col>
-            <Col xs={6} sm={6} md={6} lg={6}>
+            <Col xs={6} sm={6} md={6} lg={7}>
               {
                 this.showPage(page)
               }
             </Col>
-            <Col xs={3} sm={3} md={4} lg={4}>Test2</Col>
+            <Col xs={3} sm={3} md={4} lg={3}>Test2</Col>
           </Row>
         </Grid>
       </div>

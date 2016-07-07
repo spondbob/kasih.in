@@ -20,6 +20,7 @@ class HelpPage extends React.Component {
     return (
       <div>
         <div className="container">
+          <HelpForm />
           <ul className="collection">
             {items.map(item =>
               <HelpFeedItem key={item.id} item={item} />
