@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { getHelpsFeed } from '../../actions/helpActions';
 import HelpForm from '../common/help/HelpForm';
 import HelpFeedItem from '../common/help/presentation/HelpFeedItem';
+import CircularProgress from 'material-ui/CircularProgress';
 
 function loadData(props) {
   props.getHelpsFeed();
@@ -17,15 +18,29 @@ class HelpPage extends React.Component {
 
   render() {
     const { helps, items, isFetching } = this.props;
+    const styles = {
+      circularProgress: {
+        margin: "auto",
+        width: "10%",
+        padding: "20px",
+      },
+    };
     return (
       <div>
         <div className="container">
           <HelpForm />
-          <ul className="collection">
-            {items.map(item =>
-              <HelpFeedItem key={item.id} item={item} />
-            )}
-          </ul>
+            {
+              isFetching ?
+                <div style={styles.circularProgress}>
+                  <CircularProgress size={1} />
+                </div> :
+                <ul className="collection">
+                  {items.map(item =>
+                    <HelpFeedItem key={item.id} item={item} />
+                  )}
+                </ul>
+            }
+
         </div>
       </div>
     );

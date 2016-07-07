@@ -24,10 +24,7 @@ const HelpFeedItem = (props) =>
       showExpandableButton
       avatar="images/yuna.jpg" />
     <CardText expandable>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-      Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed.
-      Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+      {props.item.description}
     </CardText>
     <CardActions>
       <FlatButton label="Action1" />
