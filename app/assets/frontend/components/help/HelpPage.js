@@ -5,6 +5,7 @@ import { getHelpsFeed } from '../../actions/helpActions';
 import HelpForm from '../common/help/HelpForm';
 import HelpFeedItem from '../common/help/presentation/HelpFeedItem';
 import CircularProgress from 'material-ui/CircularProgress';
+import { getSortedFeeds } from '../../selectors/helpSelector';
 
 function loadData(props) {
   props.getHelpsFeed();
@@ -17,7 +18,7 @@ class HelpPage extends React.Component {
   }
 
   render() {
-    const { helps, items, isFetching } = this.props;
+    const { items, isFetching } = this.props;
     const styles = {
       circularProgress: {
         margin: "auto",
@@ -48,7 +49,6 @@ class HelpPage extends React.Component {
 }
 
 HelpPage.propTypes = {
-  helps: PropTypes.object.isRequired,
   getHelpsFeed: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
@@ -57,8 +57,7 @@ HelpPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    helps: state.helps,
-    items: state.helps.items,
+    items: getSortedFeeds(state),
     isFetching: state.helps.isFetching,
   };
 }

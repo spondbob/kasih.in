@@ -27,7 +27,7 @@ const HelpDescriptionModal = (props) =>
       />,
       <FlatButton
         key="saveButton"
-        label="Submit"
+        label="Save"
         primary
         onTouchTap={props.hideDescriptionModalAction}
       />,

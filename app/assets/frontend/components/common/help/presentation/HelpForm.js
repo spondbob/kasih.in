@@ -16,9 +16,18 @@ import { reduxForm, getValues } from 'redux-form';
 import HelpDescriptionModal from './HelpDescriptionModal';
 import {
   showDescriptionModal,
-  hideDescriptionModal } from '../../../../actions/helpActions';
+  hideDescriptionModal,
+  helpSubmit,
+} from '../../../../actions/helpActions';
 
-export const fields = ['message', 'description', 'photos', 'lang', 'long'];
+export const fields = [
+  'name',
+  'message',
+  'description',
+  'photos',
+  'lang',
+  'long',
+];
 
 const styles = {
   root: {
@@ -28,6 +37,15 @@ const styles = {
   textField: {
     width: '90%',
   },
+};
+
+const submit = (values, dispatch) => {
+  // Here we will assign fields that user does not need to fill.
+  // FIXME: name is hardcoded.
+  const submitValues = Object.assign({}, values, { name: 'John' });
+  return new Promise((resolve, reject) => {
+    dispatch(helpSubmit({ submitValues, resolve, reject }));
+  });
 };
 
 class HelpForm extends React.Component {
@@ -42,7 +60,7 @@ class HelpForm extends React.Component {
 
   render() {
     const {
-      fields: { message, description },
+      fields: { name, message, description },
       handleSubmit,
       resetForm,
       submitting,
@@ -54,7 +72,7 @@ class HelpForm extends React.Component {
     return (
       <div style={styles.root}>
         <h1 className="center">What can you help today?</h1>
-        <form onSubmit={this.onClickPost}>
+        <form onSubmit={handleSubmit(submit.bind(this))}>
           <div>
             <TextField
               style={styles.textField}
@@ -69,13 +87,15 @@ class HelpForm extends React.Component {
               disabled={
                 formValues === undefined ||
                 formValues === null ||
-                formValues.message === ''
+                formValues.message === '' ||
+                submitting
               }
               label="POST"
               icon={<FontIcon className="material-icons">send</FontIcon>} />
             <IconButton
               tooltip="Description"
               onClick={() => this.handleDescriptionOpen()}
+              disabled={submitting}
               >
               <SubjectIcon />
             </IconButton>
@@ -94,20 +114,21 @@ class HelpForm extends React.Component {
 
 HelpForm.propTypes = {
   actions: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
+  formValues: PropTypes.object,
   handleSubmit: PropTypes.func.isRequired,
+  hideDescriptionModalAction: PropTypes.func.isRequired,
+  modalIsOpened: PropTypes.bool.isRequired,
   resetForm: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  modalIsOpened: PropTypes.bool.isRequired,
-  formValues: PropTypes.object,
-  dispatch: PropTypes.func,
-  hideDescriptionModalAction: PropTypes.func,
 };
 
 function mapStateToProps(state) {
   return {
     modalIsOpened: state.help.modalIsOpened,
     formValues: getValues(state.form.help),
+    submitting: state.help.submitting,
   };
 }
 

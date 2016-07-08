@@ -1,9 +1,11 @@
 import * as types from './actionTypes';
 
-export function createHelp(help) {
+export function helpSubmit(promise = {}) {
   return {
-    type: types.CREATE_HELP,
-    help,
+    type: types.HELP_SUBMIT,
+    submitted: promise.submitValues,
+    reject: promise.reject,
+    resolve: promise.resolve,
   };
 }
 

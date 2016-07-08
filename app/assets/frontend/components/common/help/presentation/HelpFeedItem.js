@@ -7,6 +7,8 @@ import {
   CardMedia,
   CardTitle,
   CardText } from 'material-ui/Card';
+import isEmpty from 'lodash/isEmpty';
+
 
 // TODO: Optimize the usage of cards
 // CardMedia: Add card media / maps?
@@ -21,7 +23,7 @@ const HelpFeedItem = (props) =>
       title={props.item.name}
       subtitle={props.item.message}
       actAsExpander
-      showExpandableButton
+      showExpandableButton={!isEmpty(props.item.description)}
       avatar="images/yuna.jpg" />
     <CardText expandable>
       {props.item.description}
