@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardText } from 'material-ui/Card';
 import isEmpty from 'lodash/isEmpty';
+import TextField from 'material-ui/TextField';
 
 
 // TODO: Optimize the usage of cards

@@ -10,14 +10,21 @@ import FontIcon from 'material-ui/FontIcon';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import SubjectIcon from 'material-ui/svg-icons/action/subject';
+import AddLocationIcon from 'material-ui/svg-icons/maps/add-location';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reduxForm, getValues } from 'redux-form';
 import HelpDescriptionModal from './HelpDescriptionModal';
+import HelpLocationModal from './HelpLocationModal';
+import isEmpty from 'lodash/isEmpty';
+import { cyan500 } from 'material-ui/styles/colors';
 import {
-  showDescriptionModal,
-  hideDescriptionModal,
+  cancelDescriptionModal,
   helpSubmit,
+  hideDescriptionModal,
+  hideLocationModal,
+  showDescriptionModal,
+  showLocationModal,
 } from '../../../../actions/helpActions';
 
 export const fields = [
@@ -58,15 +65,22 @@ class HelpForm extends React.Component {
     this.props.dispatch(showDescriptionModal());
   }
 
+  handleLocationOpen() {
+    this.props.dispatch(showLocationModal());
+  }
+
   render() {
     const {
-      fields: { name, message, description },
+      fields: { name, message, description, lang, long },
       handleSubmit,
       resetForm,
       submitting,
       formValues,
-      modalIsOpened,
+      descriptionModalIsOpened,
       hideDescriptionModalAction,
+      hideLocationModalAction,
+      locationModalIsOpened,
+      cancelDescriptionModalAction,
     } = this.props;
 
     return (
@@ -97,15 +111,32 @@ class HelpForm extends React.Component {
               onClick={() => this.handleDescriptionOpen()}
               disabled={submitting}
               >
-              <SubjectIcon />
+              <SubjectIcon
+                color={
+                  !isEmpty(formValues) && formValues.description !== '' ?
+                  cyan500 : ''} />
             </IconButton>
+            <IconButton
+              tooltip="Location"
+              onClick={() => this.handleLocationOpen()}
+              disabled={submitting}
+              >
+              <AddLocationIcon />
+            </IconButton>
+
           </div>
           <HelpDescriptionModal
-            modalIsOpened={modalIsOpened}
+            descriptionModalIsOpened={descriptionModalIsOpened}
             hideDescriptionModalAction={hideDescriptionModalAction}
+            cancelDescriptionModalAction={cancelDescriptionModalAction}
             description={description}
             />
+          <HelpLocationModal
+            locationModalIsOpened={locationModalIsOpened}
+            hideLocationModalAction={hideLocationModalAction}
+            />
         </form>
+
 
       </div>
     );
@@ -114,34 +145,38 @@ class HelpForm extends React.Component {
 
 HelpForm.propTypes = {
   actions: PropTypes.object.isRequired,
+  cancelDescriptionModalAction: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
   formValues: PropTypes.object,
   handleSubmit: PropTypes.func.isRequired,
   hideDescriptionModalAction: PropTypes.func.isRequired,
-  modalIsOpened: PropTypes.bool.isRequired,
+  hideLocationModalAction: PropTypes.func.isRequired,
+  descriptionModalIsOpened: PropTypes.bool.isRequired,
+  locationModalIsOpened: PropTypes.bool.isRequired,
   resetForm: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    modalIsOpened: state.help.modalIsOpened,
+    descriptionModalIsOpened: state.help.descriptionModalIsOpened,
     formValues: getValues(state.form.help),
+    locationModalIsOpened: state.help.locationModalIsOpened,
     submitting: state.help.submitting,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    cancelDescriptionModalAction: bindActionCreators(cancelDescriptionModal, dispatch),
     hideDescriptionModalAction: bindActionCreators(hideDescriptionModal, dispatch),
+    hideLocationModalAction: bindActionCreators(hideLocationModal, dispatch),
   };
 }
 
 const validate = (values) => {
   const errors = {};
-  const isEmpty = (value) =>
-    value === undefined || value === null || value === '';
 
   if (isEmpty(values.message)) {
     errors.message = 'Message is required';

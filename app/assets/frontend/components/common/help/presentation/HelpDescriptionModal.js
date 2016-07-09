@@ -16,14 +16,14 @@ const styles = {
 const HelpDescriptionModal = (props) =>
   <Dialog
     title="Add description"
-    open={props.modalIsOpened}
+    open={props.descriptionModalIsOpened}
     contentStyle={styles.modal}
     actions={[
       <FlatButton
         key="cancelButton"
         label="Cancel"
         primary
-        onTouchTap={props.hideDescriptionModalAction}
+        onTouchTap={props.cancelDescriptionModalAction}
       />,
       <FlatButton
         key="saveButton"
@@ -42,8 +42,9 @@ const HelpDescriptionModal = (props) =>
   </Dialog>;
 
 HelpDescriptionModal.propTypes = {
-  modalIsOpened: PropTypes.bool.isRequired,
+  descriptionModalIsOpened: PropTypes.bool.isRequired,
   hideDescriptionModalAction: PropTypes.func.isRequired,
+  cancelDescriptionModalAction: PropTypes.func.isRequired,
   description: PropTypes.object.isRequired,
 };
 

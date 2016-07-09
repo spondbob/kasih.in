@@ -21,6 +21,30 @@ export function hideDescriptionModal() {
   };
 }
 
+export function cancelDescriptionModal() {
+  return {
+    type: types.CANCEL_DESCRIPTION_MODAL,
+  };
+}
+
+export function showLocationModal() {
+  return {
+    type: types.SHOW_LOCATION_MODAL,
+  };
+}
+
+export function hideLocationModal() {
+  return {
+    type: types.HIDE_LOCATION_MODAL,
+  };
+}
+
+export function cancelLocationModal() {
+  return {
+    type: types.CANCEL_LOCATION_MODAL,
+  };
+}
+
 export function getHelpsFeed() {
   return {
     type: types.HELPS_FEED_REQUEST,

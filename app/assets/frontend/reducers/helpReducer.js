@@ -1,7 +1,8 @@
 import * as types from '../actions/actionTypes';
 
 export default function helpReducer(state = {
-  modalIsOpened: false,
+  descriptionModalIsOpened: false,
+  locationModalIsOpened: false,
   submitting: false,
   submitted: {} }, action) {
   switch (action.type) {
@@ -16,9 +17,13 @@ export default function helpReducer(state = {
     case types.HELP_SUBMIT_FAILED:
       return Object.assign({}, state, { submitting: false });
     case types.SHOW_DESCRIPTION_MODAL:
-      return Object.assign({}, state, { modalIsOpened: true });
+      return Object.assign({}, state, { descriptionModalIsOpened: true });
     case types.HIDE_DESCRIPTION_MODAL:
-      return Object.assign({}, state, { modalIsOpened: false });
+      return Object.assign({}, state, { descriptionModalIsOpened: false });
+    case types.SHOW_LOCATION_MODAL:
+      return Object.assign({}, state, { locationModalIsOpened: true });
+    case types.HIDE_LOCATION_MODAL:
+      return Object.assign({}, state, { locationModalIsOpened: false });
     default:
       return state;
   }
