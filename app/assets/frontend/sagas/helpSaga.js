@@ -4,7 +4,8 @@ import { api } from '../api/helpApi';
 import { takeEvery, takeLatest } from 'redux-saga';
 import { take, put, call, fork, select } from 'redux-saga/effects';
 import isEmpty from 'lodash/isEmpty';
-import { reset } from 'redux-form';
+import values from 'lodash/values';
+import { reset, change } from 'redux-form';
 
 function* getHelps() {
   try {
@@ -17,10 +18,10 @@ function* getHelps() {
 
 // TODO: There is no API for post so instead we just put the submitted help
 // in the state by dispatching HELP_SUBMIT_SUCCESS.
-export function* postHelp() {
+export function* postHelp(action) {
   const { submitted,
     resolve,
-    reject } = yield take(types.HELP_SUBMIT);
+    reject } = action;
   if (submitted !== undefined && !isEmpty(submitted)) {
     yield put({
       type: types.HELP_SUBMIT_SUCCESS,
@@ -31,6 +32,19 @@ export function* postHelp() {
   }
 }
 
+function* cancelDescriptionModal() {
+  yield put(change('help', 'description', ''));
+  yield put(helpActions.hideDescriptionModal());
+}
+
 export function* helpFeedsFlow() {
   yield takeLatest(types.HELPS_FEED_REQUEST, getHelps);
+}
+
+export function* helpFormFlow() {
+  yield takeEvery(types.CANCEL_DESCRIPTION_MODAL, cancelDescriptionModal);
+}
+
+export function* helpSubmitFlow() {
+  yield takeEvery(types.HELP_SUBMIT, postHelp);
 }
