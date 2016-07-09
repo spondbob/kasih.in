@@ -4,7 +4,6 @@ import { api } from '../api/helpApi';
 import { takeEvery, takeLatest } from 'redux-saga';
 import { take, put, call, fork, select } from 'redux-saga/effects';
 import isEmpty from 'lodash/isEmpty';
-import values from 'lodash/values';
 import { reset, change } from 'redux-form';
 
 function* getHelps() {
