@@ -26,7 +26,8 @@ export function* postHelp(action) {
       type: types.HELP_SUBMIT_SUCCESS,
       submitted });
     yield call(resolve);
-    // Clear the form after submit is success
+    // Reset the form after submit is success
+    yield put({ type: types.LOCATION_DISCARDED });
     yield put(reset('help'));
   }
 }
@@ -36,12 +37,39 @@ function* cancelDescriptionModal() {
   yield put(helpActions.hideDescriptionModal());
 }
 
+function* saveLocation(action) {
+  const { marker } = action;
+  if (!isEmpty(marker)) {
+    yield put(change('help', 'latitude', marker.lat));
+    yield put(change('help', 'longitude', marker.lng));
+    yield put(helpActions.centerChanged({
+      lat: marker.lat,
+      lng: marker.lng,
+    }));
+    yield put(helpActions.hideLocationModal());
+  }
+}
+
+function* discardLocation() {
+  yield put(change('help', 'latitude', ''));
+  yield put(change('help', 'longitude', ''));
+  yield put(helpActions.hideLocationModal());
+}
+
 export function* helpFeedsFlow() {
   yield takeLatest(types.HELPS_FEED_REQUEST, getHelps);
 }
 
-export function* helpFormFlow() {
+export function* descriptionFieldFlow() {
   yield takeEvery(types.CANCEL_DESCRIPTION_MODAL, cancelDescriptionModal);
+}
+
+export function* saveLocationFieldFlow() {
+  yield takeEvery(types.LOCATION_SAVED, saveLocation);
+}
+
+export function* discardLocationFieldFlow() {
+  yield takeEvery(types.LOCATION_DISCARDED, discardLocation);
 }
 
 export function* helpSubmitFlow() {

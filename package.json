@@ -11,11 +11,16 @@
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "6.8.0",
+    "classnames": "^2.2.5",
+    "flexboxgrid": "^6.3.0",
     "jquery": "2.2.3",
+    "lodash": "^4.13.1",
     "material-ui": "^0.15.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-event-listener": "^0.2.1",
+    "react-flexbox-grid": "^0.9.6",
+    "react-google-maps": "^4.11.0",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",
     "react-router-redux": "4.0.4",
@@ -24,6 +29,7 @@
     "redux-form": "^5.2.5",
     "redux-form-material-ui": "^2.0.0",
     "redux-saga": "^0.10.4",
+    "reselect": "^2.5.3",
     "toastr": "2.1.2"
   },
   "devDependencies": {
@@ -39,7 +45,7 @@
     "babel-register": "6.8.0",
     "colors": "1.1.2",
     "compression": "1.6.1",
-    "css-loader": "0.23.1",
+    "css-loader": "^0.23.1",
     "enzyme": "2.2.0",
     "eslint": "2.9.0",
     "eslint-config-airbnb": "^9.0.1",

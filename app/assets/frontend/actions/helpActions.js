@@ -9,6 +9,20 @@ export function helpSubmit(promise = {}) {
   };
 }
 
+export function centerChanged(center = {}) {
+  return {
+    type: types.CENTER_CHANGED,
+    center,
+  };
+}
+
+export function markerChanged(marker = {}) {
+  return {
+    type: types.MARKER_CHANGED,
+    marker,
+  };
+}
+
 export function showDescriptionModal() {
   return {
     type: types.SHOW_DESCRIPTION_MODAL,
@@ -42,6 +56,19 @@ export function hideLocationModal() {
 export function cancelLocationModal() {
   return {
     type: types.CANCEL_LOCATION_MODAL,
+  };
+}
+
+export function saveLocation(marker) {
+  return {
+    type: types.LOCATION_SAVED,
+    marker,
+  };
+}
+
+export function discardLocation() {
+  return {
+    type: types.LOCATION_DISCARDED,
   };
 }
 

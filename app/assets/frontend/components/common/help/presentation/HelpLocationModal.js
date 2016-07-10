@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import GoogleMap from 'google-map-react';
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 
 const styles = {
   modal: {
@@ -24,30 +24,55 @@ const HelpLocationModal = (props) =>
         key="cancelButton"
         label="Cancel"
         primary
+        onTouchTap={props.handleLocationDiscard}
       />,
       <FlatButton
         key="saveButton"
         label="Save"
         primary
-        onTouchTap={props.hideLocationModalAction}
+        onTouchTap={props.handleLocationSave}
       />,
     ]}>
-    <div style={{ width: '100%', height: '400px' }}>
-      <GoogleMap
-        defaultZoom={props.zoom}
-        defaultCenter={props.center} />
-    </div>
+    <GoogleMapLoader
+      query={{ libraries: "geometry,drawing,places,visualization" }}
+      containerElement={
+        <div
+          style={{
+            width: '100%',
+            height: '400px',
+          }}
+        />
+      }
+      googleMapElement={
+        <GoogleMap
+          defaultZoom={18}
+          defaultCenter={props.center}
+        >
+          <Marker
+            draggable
+            position={props.marker}
+            onDragend={props.handleMarkerPositionChanged}
+          />
+
+        </GoogleMap>
+      }
+    />
   </Dialog>;
 
 HelpLocationModal.defaultProps = {
   center: { lat: 59.938043, lng: 30.337157 },
+  marker: { lat: 59.938043, lng: 30.337157 },
   zoom: 9,
 };
 
 HelpLocationModal.propTypes = {
-  locationModalIsOpened: PropTypes.bool.isRequired,
+  center: PropTypes.object,
+  handleLocationSave: PropTypes.func.isRequired,
+  handleLocationDiscard: PropTypes.func.isRequired,
+  handleMarkerPositionChanged: PropTypes.func,
   hideLocationModalAction: PropTypes.func.isRequired,
-  center: PropTypes.object.isRequired,
+  locationModalIsOpened: PropTypes.bool.isRequired,
+  marker: PropTypes.object,
   zoom: PropTypes.number.isRequired,
 };
 

@@ -1,8 +1,10 @@
 import * as types from '../actions/actionTypes';
 
 export default function helpReducer(state = {
+  center: {},
   descriptionModalIsOpened: false,
   locationModalIsOpened: false,
+  locationSaved: false,
   submitting: false,
   submitted: {} }, action) {
   switch (action.type) {
@@ -24,6 +26,14 @@ export default function helpReducer(state = {
       return Object.assign({}, state, { locationModalIsOpened: true });
     case types.HIDE_LOCATION_MODAL:
       return Object.assign({}, state, { locationModalIsOpened: false });
+    case types.CENTER_CHANGED:
+      return Object.assign({}, state, { center: action.center });
+    case types.MARKER_CHANGED:
+      return Object.assign({}, state, { marker: action.marker });
+    case types.LOCATION_SAVED:
+      return Object.assign({}, state, { locationSaved: true });
+    case types.LOCATION_DISCARDED:
+      return Object.assign({}, state, { locationSaved: false, marker: state.center });
     default:
       return state;
   }
