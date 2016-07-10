@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from "react-google-maps";
+import HelpMap from './HelpMap';
 
 const styles = {
   modal: {
@@ -33,30 +33,16 @@ const HelpLocationModal = (props) =>
         onTouchTap={props.handleLocationSave}
       />,
     ]}>
-    <GoogleMapLoader
-      query={{ libraries: "geometry,drawing,places,visualization" }}
-      containerElement={
-        <div
-          style={{
-            width: '100%',
-            height: '400px',
-          }}
-        />
-      }
-      googleMapElement={
-        <GoogleMap
-          defaultZoom={18}
-          defaultCenter={props.center}
-        >
-          <Marker
-            draggable
-            position={props.marker}
-            onDragend={props.handleMarkerPositionChanged}
-          />
-
-        </GoogleMap>
-      }
-    />
+    <HelpMap
+      style={{
+        width: '100%',
+        height: '400px',
+      }}
+      defaultZoom={18}
+      center={props.center}
+      marker={props.marker}
+      draggable
+      handleDragend={props.handleMarkerPositionChanged} />
   </Dialog>;
 
 HelpLocationModal.defaultProps = {
