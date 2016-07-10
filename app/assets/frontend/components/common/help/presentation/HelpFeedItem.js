@@ -9,6 +9,7 @@ import {
   CardText } from 'material-ui/Card';
 import isEmpty from 'lodash/isEmpty';
 import TextField from 'material-ui/TextField';
+import HelpMap from './HelpMap';
 
 
 // TODO: Optimize the usage of cards
@@ -24,10 +25,34 @@ const HelpFeedItem = (props) =>
       title={props.item.name}
       subtitle={props.item.message}
       actAsExpander
-      showExpandableButton={!isEmpty(props.item.description)}
+      showExpandableButton={
+        !isEmpty(props.item.description) ||
+        (props.item.hasOwnProperty('latitude') && props.item.hasOwnProperty('longitude'))
+      }
       avatar="images/yuna.jpg" />
     <CardText expandable>
-      {props.item.description}
+      <div style={{ padding: '5px' }}>
+        {props.item.description}
+      </div>
+      <div>
+        {
+          props.item.hasOwnProperty('latitude') && props.item.hasOwnProperty('longitude') ?
+            <HelpMap
+              style={{
+                width: '100%',
+                height: '200px',
+                padding: '5px',
+              }}
+              center={{
+                lat: props.item.latitude,
+                lng: props.item.longitude,
+              }}
+              marker={{
+                lat: props.item.latitude,
+                lng: props.item.longitude,
+              }} /> : ''
+        }
+      </div>
     </CardText>
     <CardActions>
       <FlatButton label="Action1" />
