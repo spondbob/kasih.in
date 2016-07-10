@@ -24,10 +24,15 @@ const HelpFeedItem = (props) =>
     <CardHeader
       title={props.item.name}
       subtitle={props.item.message}
-      actAsExpander
+      actAsExpander={
+        !isEmpty(props.item.description) ||
+        ((props.item.hasOwnProperty('latitude') && props.item.hasOwnProperty('longitude')) &&
+        (props.item.latitude !== undefined && props.item.longitude !== undefined))
+      }
       showExpandableButton={
         !isEmpty(props.item.description) ||
-        (props.item.hasOwnProperty('latitude') && props.item.hasOwnProperty('longitude'))
+        ((props.item.hasOwnProperty('latitude') && props.item.hasOwnProperty('longitude')) &&
+        (props.item.latitude !== undefined && props.item.longitude !== undefined))
       }
       avatar="images/yuna.jpg" />
     <CardText expandable>
@@ -36,7 +41,8 @@ const HelpFeedItem = (props) =>
       </div>
       <div>
         {
-          props.item.hasOwnProperty('latitude') && props.item.hasOwnProperty('longitude') ?
+          (props.item.hasOwnProperty('latitude') && props.item.hasOwnProperty('longitude')) &&
+          (props.item.latitude !== undefined && props.item.longitude !== undefined) ?
             <HelpMap
               style={{
                 width: '100%',

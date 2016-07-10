@@ -80,8 +80,6 @@ class HelpForm extends React.Component {
 
   componentDidMount() {
     geolocation.getCurrentPosition((position) => {
-      this.props.dispatch(change('help', 'latitude', position.coords.latitude));
-      this.props.dispatch(change('help', 'longitude', position.coords.longitude));
       this.props.dispatch(centerChanged({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
