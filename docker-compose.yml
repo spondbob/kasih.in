@@ -1,9 +1,15 @@
-web:
-  build: .
-  command: bundle exec rails s -b '0.0.0.0'
-  volumes:
-    - .:/var/app
-    - /var/app/node_modules
-  ports:
-    - 3000:3000
-    - 8080:8080
+version: '2'
+
+services:
+  web:
+    build: .
+    command: bundle exec rails s -b '0.0.0.0'
+    volumes:
+      - .:/var/app
+      - node_modules:/var/app/node_modules
+    ports:
+      - 3000:3000
+      - 8080:8080
+volumes:
+  node_modules:
+    driver: local
