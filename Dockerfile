@@ -23,4 +23,4 @@ WORKDIR $app
 ADD . $app
 
 # Run webpack
-CMD webpack-dev-server --config webpack.hot.config.js --hot --progress --inline --host=0.0.0.0
+#CMD webpack-dev-server --config webpack.hot.config.js --hot --progress --inline --host=0.0.0.0
